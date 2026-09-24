@@ -1,26 +1,241 @@
 @import "tailwindcss";
 
+/* ============================================================
+   DESIGN SYSTEM — Retro Vintage + Futuristic + Editorial
+   ============================================================ */
+
+/* ── Core Design Tokens ────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Background */
+  --bg-primary: #0A0A0A;
+  --bg-secondary: #111111;
+  --bg-elevated: #1A1A1A;
+  --bg-surface: #141414;
+
+  /* Borders */
+  --border-default: #1E1E1E;
+  --border-subtle: #181818;
+  --border-hover: #2A2A2A;
+
+  /* Text */
+  --text-primary: #F5F0EB;
+  --text-secondary: #8A8580;
+  --text-tertiary: #5A5550;
+  --text-inverse: #0A0A0A;
+
+  /* Accent — warm copper/orange */
+  --accent-primary: #C87941;
+  --accent-secondary: #D4956B;
+  --accent-muted: #3D2E24;
+  --accent-glow: rgba(200, 121, 65, 0.15);
+
+  /* Vintage tones */
+  --vintage-cream: #F2E8DE;
+  --vintage-olive: #4A5043;
+  --vintage-warm: #2A2420;
+
+  /* Typography */
+  --font-serif: var(--font-serif, "Instrument Serif", "Georgia", serif);
+  --font-sans: var(--font-sans, "Geist", system-ui, sans-serif);
+  --font-technical: var(--font-technical, "JetBrains Mono", "Geist Mono", monospace);
+  --font-mono: var(--font-mono, "Geist Mono", monospace);
+
+  /* Spacing (8px base) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+  --space-32: 128px;
+
+  /* Transitions */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 600ms;
+
+  /* Layout */
+  --max-width: 1400px;
+  --gutter: 24px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@media (min-width: 768px) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --gutter: 40px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@media (min-width: 1200px) {
+  :root {
+    --gutter: 64px;
+  }
 }
+
+/* ── Tailwind v4 Theme ─────────────────────────────────────── */
+@theme inline {
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-bg-surface: var(--bg-surface);
+
+  --color-border-default: var(--border-default);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-hover: var(--border-hover);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-text-inverse: var(--text-inverse);
+
+  --color-accent: var(--accent-primary);
+  --color-accent-secondary: var(--accent-secondary);
+  --color-accent-muted: var(--accent-muted);
+
+  --color-vintage-cream: var(--vintage-cream);
+  --color-vintage-olive: var(--vintage-olive);
+
+  --font-serif: var(--font-serif);
+  --font-sans: var(--font-sans);
+  --font-technical: var(--font-technical);
+  --font-mono: var(--font-mono);
+}
+
+/* ── Global Resets & Base ──────────────────────────────────── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── Selection ─────────────────────────────────────────────── */
+::selection {
+  background-color: var(--accent-primary);
+  color: var(--text-inverse);
+}
+
+/* ── Links ─────────────────────────────────────────────────── */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ── Typography Utilities ──────────────────────────────────── */
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-technical {
+  font-family: var(--font-technical);
+}
+
+/* Display headings — editorial oversized type */
+.text-display {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+/* Section labels — monospace technical metadata */
+.text-label {
+  font-family: var(--font-technical);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+/* ── Layout Container ──────────────────────────────────────── */
+.container-editorial {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+
+/* ── Grain Overlay ─────────────────────────────────────────── */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.03;
+  mix-blend-mode: overlay;
+}
+
+/* ── Thin Borders ──────────────────────────────────────────── */
+.border-editorial {
+  border-color: var(--border-default);
+  border-style: solid;
+}
+
+/* Dashed editorial border */
+.border-dashed-editorial {
+  border-color: var(--border-default);
+  border-style: dashed;
+}
+
+/* ── Reduced Motion ────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-hover);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-primary);
+}
+
+/* ── Focus States (Accessibility) ──────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+/* ── Loader Styles (imported from existing portfolio) ──────── */
+/* These are kept in a separate file and imported by the loader component */
