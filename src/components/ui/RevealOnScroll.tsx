@@ -31,7 +31,7 @@ export default function RevealOnScroll({
   return (
     <motion.div
       ref={ref}
-      className={className}
+      className={`${className} max-md:!opacity-100 max-md:!transform-none`}
       initial={{ opacity: 0, y: yOffset }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: yOffset }}
       transition={{

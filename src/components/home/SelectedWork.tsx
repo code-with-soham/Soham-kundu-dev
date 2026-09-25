@@ -13,7 +13,7 @@ export default function SelectedWork() {
   const featuredProjects = getFeaturedProjects();
 
   return (
-    <section id="work" className="py-24 md:py-40 relative border-t border-[var(--border-subtle)] bg-[var(--bg-primary)]">
+    <section id="work" className="py-16 md:py-40 relative border-t border-[var(--border-subtle)] bg-[var(--bg-primary)]">
       <div className="container-editorial">
         <SectionLabel label="SELECTED WORK" number="002" className="mb-24 md:mb-40" />
 
@@ -82,16 +82,18 @@ export default function SelectedWork() {
                       )}
                     </div>
 
-                    <div className="flex items-center gap-8 font-technical text-xs tracking-widest uppercase text-[var(--text-secondary)]">
+                    <div className="flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-8 font-technical text-xs tracking-widest uppercase text-[var(--text-secondary)] mt-8 md:mt-0">
                       <HoverLink href={`/projects/${project.slug}`}>
                         Case Study <span className="ml-1 inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
                       </HoverLink>
                       
-                      {project.links.map(link => (
-                        <HoverLink key={link.url} href={link.url} external>
-                          {link.label}
-                        </HoverLink>
-                      ))}
+                      <div className="flex gap-6 md:gap-8">
+                        {project.links.map(link => (
+                          <HoverLink key={link.url} href={link.url} external>
+                            {link.label}
+                          </HoverLink>
+                        ))}
+                      </div>
                     </div>
                   </RevealOnScroll>
                 </div>

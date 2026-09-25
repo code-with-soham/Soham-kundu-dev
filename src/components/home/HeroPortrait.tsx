@@ -35,7 +35,7 @@ export default function HeroPortrait({ mouseX, mouseY, setHoverState }: HeroPort
 
   return (
     <motion.div 
-      className="relative w-[60%] md:w-[28%] aspect-[3/4] z-20 mx-auto md:mx-0 md:ml-auto md:-mt-12 cursor-pointer md:cursor-none"
+      className="relative w-[80%] md:w-[28%] aspect-[3/4] z-20 md:mx-0 md:ml-auto md:-mt-12 cursor-pointer md:cursor-none mb-12 md:mb-0"
       style={{ x, y }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}

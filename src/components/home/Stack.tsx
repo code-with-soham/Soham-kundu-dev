@@ -9,7 +9,7 @@ export default function Stack() {
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
 
   return (
-    <section id="stack" className="py-24 md:py-40 relative border-t border-[var(--border-subtle)] bg-[var(--bg-secondary)]">
+    <section id="stack" className="py-16 md:py-40 relative border-t border-[var(--border-subtle)] bg-[var(--bg-secondary)]">
       <div className="container-editorial">
         <SectionLabel label="TECHNICAL STACK" number="005" className="mb-24" />
 

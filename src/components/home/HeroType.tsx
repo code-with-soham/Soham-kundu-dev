@@ -21,13 +21,13 @@ export default function HeroType({ mouseX, mouseY }: HeroTypeProps) {
 
   return (
     <motion.div 
-      className="w-full md:w-[70%] z-40 relative pointer-events-auto"
+      className="w-full md:w-[70%] z-40 relative pointer-events-auto mb-8 md:mb-0"
       style={{ x, y }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       data-cursor="IDENTITY"
     >
-      <h1 className="text-display text-[16vw] md:text-[11vw] leading-[0.85] text-[var(--text-primary)] font-serif uppercase flex flex-col">
+      <h1 className="text-display text-[clamp(64px,18vw,120px)] md:text-[11vw] leading-[0.9] md:leading-[0.85] text-[var(--text-primary)] font-serif uppercase flex flex-col">
         {/* FIRST NAME */}
         <div className="flex overflow-hidden group">
           {firstNameLetters.map((letter, i) => (

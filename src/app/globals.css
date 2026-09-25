@@ -61,7 +61,7 @@
 
   /* Layout */
   --max-width: 1400px;
-  --gutter: 24px;
+  --gutter: clamp(16px, 5vw, 24px);
 }
 
 @media (min-width: 768px) {

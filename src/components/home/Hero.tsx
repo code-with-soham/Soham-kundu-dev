@@ -40,25 +40,27 @@ export default function Hero() {
 
   return (
     <section 
-      className="relative min-h-screen flex flex-col justify-between overflow-hidden bg-[var(--bg-primary)] select-none"
+      className="relative md:min-h-screen flex flex-col md:justify-between overflow-hidden bg-[var(--bg-primary)] select-none border-b border-[var(--border-subtle)] md:border-none"
       onPointerMove={handlePointerMove}
       onPointerLeave={() => { mouseX.set(0); mouseY.set(0); setHoverState("SOFTWARE ENGINEERING"); }}
     >
-      {/* Background Interactive Field */}
-      <HeroInteractiveField mouseX={mouseX} mouseY={mouseY} />
+      {/* Background Interactive Field - Hidden on Mobile */}
+      <div className="hidden md:block">
+        <HeroInteractiveField mouseX={mouseX} mouseY={mouseY} />
+      </div>
 
       {/* Time Shift Glitch Overlay (Runs once) */}
       <motion.div 
-        className="absolute inset-0 z-50 pointer-events-none mix-blend-difference bg-white"
+        className="hidden md:block absolute inset-0 z-50 pointer-events-none mix-blend-difference bg-white"
         initial={{ opacity: 0.1 }}
         animate={{ opacity: timeShift ? [0.1, 0, 0.05, 0] : 0 }}
         transition={{ duration: 0.8, ease: "linear" }}
       />
 
-      <div className="container-editorial flex-grow flex flex-col justify-between relative z-10 pt-8 pb-8 md:pt-12 md:pb-12 h-full">
+      <div className="container-editorial flex flex-col md:justify-between relative z-10 pt-28 pb-16 md:pt-12 md:pb-12 md:h-full">
         
         {/* Top Edge Details */}
-        <div className="w-full flex justify-between items-start font-technical text-[9px] tracking-widest text-[var(--text-tertiary)] uppercase mt-24">
+        <div className="w-full flex justify-between items-start font-technical text-[9px] tracking-widest text-[var(--text-tertiary)] uppercase mt-0 md:mt-24 mb-12 md:mb-0">
           <motion.div 
             className="flex flex-col gap-1"
             initial={{ opacity: 0, x: -20 }}

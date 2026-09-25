@@ -6,7 +6,7 @@ import { personalInfo } from "@/data/personal";
 
 export default function Contact() {
   return (
-    <section id="contact" className="py-24 md:py-40 relative bg-[var(--bg-secondary)] overflow-hidden">
+    <section id="contact" className="py-16 md:py-40 relative bg-[var(--bg-secondary)] overflow-hidden">
       {/* Background Decorative Grid */}
       <svg className="absolute inset-0 w-full h-full opacity-[0.02] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
         <defs>

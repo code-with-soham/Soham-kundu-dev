@@ -10,7 +10,7 @@ export default function Experience() {
   const education = timeline.filter((t) => t.type === "education").sort((a, b) => b.order - a.order);
 
   return (
-    <section id="experience" className="py-24 md:py-40 relative bg-[var(--bg-primary)]">
+    <section id="experience" className="py-16 md:py-40 relative bg-[var(--bg-primary)]">
       <div className="container-editorial">
         <SectionLabel label="EXPERIENCE & EDUCATION" number="004" className="mb-24" />
 
@@ -23,13 +23,13 @@ export default function Experience() {
               Professional Experience
             </h3>
             
-            <div className="border-l border-[var(--border-subtle)] ml-1 flex flex-col gap-16">
+            <div className="border-l border-[var(--border-subtle)] ml-1 flex flex-col gap-10 md:gap-16">
               {experiences.map((exp, index) => (
                 <RevealOnScroll key={index} delay={index * 0.1} className="relative pl-8 md:pl-12 group">
                   {/* Timeline Rail Indicator */}
                   <div className="absolute left-[-5px] top-2 w-[9px] h-[9px] bg-[var(--bg-primary)] border-2 border-[var(--border-default)] rounded-full group-hover:border-[var(--accent-primary)] group-hover:bg-[var(--accent-primary)] transition-colors duration-300" />
                   
-                  <div className="flex flex-col group-hover:translate-x-2 transition-transform duration-300 ease-out">
+                  <div className="flex flex-col md:group-hover:translate-x-2 transition-transform duration-300 ease-out">
                     <span className="font-technical text-xs tracking-widest text-[var(--text-tertiary)] uppercase mb-2">
                       {exp.period}
                     </span>
@@ -66,13 +66,13 @@ export default function Experience() {
               Education History
             </h3>
             
-            <div className="border-l border-[var(--border-subtle)] ml-1 flex flex-col gap-16">
+            <div className="border-l border-[var(--border-subtle)] ml-1 flex flex-col gap-10 md:gap-16">
               {education.map((edu, index) => (
                 <RevealOnScroll key={index} delay={index * 0.1} className="relative pl-8 md:pl-12 group">
                   {/* Timeline Rail Indicator */}
                   <div className="absolute left-[-5px] top-2 w-[9px] h-[9px] bg-[var(--bg-primary)] border-2 border-[var(--border-default)] rounded-full group-hover:border-[var(--text-primary)] transition-colors duration-300" />
                   
-                  <div className="flex flex-col group-hover:translate-x-2 transition-transform duration-300 ease-out">
+                  <div className="flex flex-col md:group-hover:translate-x-2 transition-transform duration-300 ease-out">
                     <span className="font-technical text-xs tracking-widest text-[var(--text-tertiary)] uppercase mb-2">
                       {edu.period}
                     </span>

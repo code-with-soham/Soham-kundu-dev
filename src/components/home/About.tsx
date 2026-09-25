@@ -5,7 +5,7 @@ import { personalInfo } from "@/data/personal";
 
 export default function About() {
   return (
-    <section id="about" className="py-24 md:py-40 relative">
+    <section id="about" className="py-16 md:py-40 relative">
       <div className="container-editorial">
         <SectionLabel label="ABOUT" number="001" className="mb-16 md:mb-24" />
         

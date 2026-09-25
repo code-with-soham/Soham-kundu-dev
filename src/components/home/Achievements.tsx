@@ -5,7 +5,7 @@ import { certifications } from "@/data/certifications";
 
 export default function Achievements() {
   return (
-    <section id="achievements" className="py-24 md:py-40 relative border-t border-[var(--border-subtle)] bg-[var(--bg-primary)]">
+    <section id="achievements" className="py-16 md:py-40 relative border-t border-[var(--border-subtle)] bg-[var(--bg-primary)]">
       <div className="container-editorial">
         <SectionLabel label="CERTIFICATION ARCHIVE" number="006" className="mb-24" />
 

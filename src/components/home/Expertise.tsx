@@ -42,7 +42,7 @@ export default function Expertise() {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(0);
 
   return (
-    <section id="expertise" className="py-24 md:py-40 relative border-t border-[var(--border-subtle)] bg-[var(--bg-secondary)]">
+    <section id="expertise" className="py-16 md:py-40 relative border-t border-[var(--border-subtle)] bg-[var(--bg-secondary)]">
       <div className="container-editorial">
         <SectionLabel label="ENGINEERING EXPERTISE" number="003" className="mb-16 md:mb-24" />
 
@@ -68,17 +68,17 @@ export default function Expertise() {
                     <div className={`absolute inset-0 bg-[var(--bg-elevated)] transform origin-left transition-transform duration-500 ease-in-out z-0 ${isExpanded ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} />
 
                     {/* Category Title */}
-                    <div className="relative z-10 w-full md:w-1/3 flex items-center gap-6">
+                    <div className="relative z-10 w-full md:w-1/3 flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
                       <span className={`font-technical text-xs tracking-widest transition-colors duration-300 ${isExpanded ? 'text-[var(--accent-primary)]' : 'text-[var(--text-tertiary)]'}`}>
                         0{index + 1}
                       </span>
-                      <h3 className={`font-serif text-3xl md:text-4xl transition-colors duration-300 ${isExpanded ? 'text-[var(--text-primary)]' : 'text-[var(--text-secondary)] group-hover:text-[var(--text-primary)]'}`}>
+                      <h3 className={`font-serif text-2xl md:text-4xl transition-colors duration-300 ${isExpanded ? 'text-[var(--text-primary)]' : 'text-[var(--text-secondary)] group-hover:text-[var(--text-primary)]'}`}>
                         {item.category}
                       </h3>
                     </div>
 
-                    {/* Skills Metadata List */}
-                    <div className="relative z-10 w-full md:w-2/3 flex flex-wrap gap-x-6 gap-y-2 font-technical text-xs tracking-wider uppercase text-[var(--text-tertiary)] group-hover:text-[var(--text-secondary)] transition-colors duration-300">
+                    {/* Skills Metadata List (Desktop only in header) */}
+                    <div className="relative z-10 w-full md:w-2/3 hidden md:flex flex-wrap gap-x-6 gap-y-2 font-technical text-xs tracking-wider uppercase text-[var(--text-tertiary)] group-hover:text-[var(--text-secondary)] transition-colors duration-300">
                       {item.skills.map((skill, i) => (
                         <span key={i} className="flex items-center gap-2">
                           <span className={`w-1 h-1 rounded-full bg-current opacity-50 ${i === 0 ? 'hidden' : 'hidden md:block'}`} />
@@ -105,8 +105,17 @@ export default function Expertise() {
                         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                         className="relative z-10 bg-[var(--bg-elevated)] px-0 md:px-12 overflow-hidden"
                       >
-                        <div className="pb-12 md:pl-[33%] md:pr-16 text-[var(--text-secondary)] font-sans text-base md:text-lg leading-relaxed">
-                          <p>{item.description}</p>
+                        <div className="pb-8 md:pb-12 md:pl-[33%] md:pr-16 text-[var(--text-secondary)] font-sans text-base md:text-lg leading-relaxed">
+                          <p className="mb-6 md:mb-0">{item.description}</p>
+                          
+                          {/* Skills Metadata List (Mobile only in expanded body) */}
+                          <div className="flex md:hidden flex-col gap-3 font-technical text-xs tracking-wider uppercase text-[var(--text-primary)]">
+                            {item.skills.map((skill, i) => (
+                              <span key={i} className="block">
+                                {skill}
+                              </span>
+                            ))}
+                          </div>
                         </div>
                       </motion.div>
                     )}
