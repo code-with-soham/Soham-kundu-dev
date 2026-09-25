@@ -19,15 +19,17 @@ export default function Home() {
 
   return (
     <main className="min-h-screen relative overflow-hidden bg-[var(--bg-primary)]">
-      {/* Preserved First Loader */}
+      {/* Preserved First Loader (Desktop Only) */}
       {!loaderComplete && (
-        <FirstLoader onComplete={() => setLoaderComplete(true)} />
+        <div className="hidden md:block">
+          <FirstLoader onComplete={() => setLoaderComplete(true)} />
+        </div>
       )}
 
-      {/* Main Portfolio Content (Revealed after loader) */}
+      {/* Main Portfolio Content */}
       <div 
         className={`transition-opacity duration-1000 ${
-          loaderComplete ? "opacity-100" : "opacity-0 h-0 overflow-hidden"
+          loaderComplete ? "opacity-100" : "opacity-100 h-auto md:opacity-0 md:h-0 md:overflow-hidden"
         }`}
       >
         <Hero />

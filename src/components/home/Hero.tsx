@@ -1,125 +1,141 @@
 "use client";
 
-import React from "react";
-import Image from "next/image";
-import { motion } from "motion/react";
-import TextReveal from "@/components/ui/TextReveal";
-import { personalInfo } from "@/data/personal";
+import React, { useState, useEffect } from "react";
+import { motion, useMotionValue } from "motion/react";
+import HeroInteractiveField from "./HeroInteractiveField";
+import HeroPortrait from "./HeroPortrait";
+import HeroType from "./HeroType";
+import HeroCTA from "./HeroCTA";
 
 export default function Hero() {
+  const [hoverState, setHoverState] = useState("SOFTWARE ENGINEERING");
+  const [timeShift, setTimeShift] = useState(true);
+
+  // Global pointer values for the Hero field (-1 to 1 normalized)
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  useEffect(() => {
+    // "Time Shift" signature moment on mount
+    const timer = setTimeout(() => {
+      setTimeShift(false);
+    }, 800); // Effect lasts 800ms
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handlePointerMove = (e: React.PointerEvent) => {
+    // Only process on devices with pointer interaction
+    if (typeof window !== "undefined" && window.matchMedia("(hover: none)").matches) return;
+    
+    const { clientX, clientY } = e;
+    const { innerWidth, innerHeight } = window;
+    
+    // Normalize to -1 to 1
+    const x = (clientX / innerWidth) * 2 - 1;
+    const y = (clientY / innerHeight) * 2 - 1;
+    
+    mouseX.set(x);
+    mouseY.set(y);
+  };
 
   return (
-    <section className="relative min-h-screen pt-48 md:pt-56 pb-16 flex flex-col justify-between overflow-hidden" data-cursor="SCROLL">
-      <div className="container-editorial flex-grow flex flex-col">
-        {/* Technical Metadata Row */}
-        <motion.div 
-          className="w-full flex justify-between items-center font-technical text-[9px] tracking-widest text-[var(--text-tertiary)] uppercase border-b border-[var(--border-subtle)] pb-4 mb-4 relative z-20"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.8 }}
-        >
-          <div className="flex gap-8">
-            <span>S. KUNDU</span>
-            <span className="hidden md:inline-block text-[var(--text-secondary)]">v2.0.26 // ARCHIVE</span>
-          </div>
-          <div className="flex gap-8">
-            <span className="hidden md:inline-block">KOLKATA, IN</span>
-            <span className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-primary)] animate-pulse" />
-              SYS.ONLINE
-            </span>
-          </div>
-        </motion.div>
+    <section 
+      className="relative min-h-screen flex flex-col justify-between overflow-hidden bg-[var(--bg-primary)] select-none"
+      onPointerMove={handlePointerMove}
+      onPointerLeave={() => { mouseX.set(0); mouseY.set(0); setHoverState("SOFTWARE ENGINEERING"); }}
+    >
+      {/* Background Interactive Field */}
+      <HeroInteractiveField mouseX={mouseX} mouseY={mouseY} />
 
-        {/* Main Editorial Content */}
-        <div className="flex-grow flex flex-col md:flex-row items-start md:items-center mt-16 md:mt-24 relative">
-          
-          {/* Typography Stack */}
-          <div className="w-full md:w-[70%] z-10">
-            <h1 className="text-display text-[16vw] md:text-[11vw] leading-[0.85] text-[var(--text-primary)] font-serif uppercase flex flex-col">
-              <div className="overflow-hidden">
-                <motion.span 
-                  className="block"
-                  initial={{ y: "100%" }}
-                  animate={{ y: 0 }}
-                  transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-                >
-                  {personalInfo.firstName}
-                </motion.span>
-              </div>
-              <div className="overflow-hidden">
-                <motion.span 
-                  className="block text-[var(--text-secondary)] italic md:ml-[10vw]"
-                  initial={{ y: "100%" }}
-                  animate={{ y: 0 }}
-                  transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-                >
-                  {personalInfo.lastName}
-                </motion.span>
-              </div>
-            </h1>
-            
-            <div className="mt-8 flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-12 pl-2">
-              <div className="w-12 h-[1px] bg-[var(--border-default)] hidden md:block" />
-              <h2 className="font-technical text-sm md:text-base tracking-widest text-[var(--accent-primary)] uppercase">
-                <TextReveal text={personalInfo.title} delay={0.6} />
-              </h2>
-            </div>
-          </div>
+      {/* Time Shift Glitch Overlay (Runs once) */}
+      <motion.div 
+        className="absolute inset-0 z-50 pointer-events-none mix-blend-difference bg-white"
+        initial={{ opacity: 0.1 }}
+        animate={{ opacity: timeShift ? [0.1, 0, 0.05, 0] : 0 }}
+        transition={{ duration: 0.8, ease: "linear" }}
+      />
 
-          {/* Portrait Image */}
+      <div className="container-editorial flex-grow flex flex-col justify-between relative z-10 pt-8 pb-8 md:pt-12 md:pb-12 h-full">
+        
+        {/* Top Edge Details */}
+        <div className="w-full flex justify-between items-start font-technical text-[9px] tracking-widest text-[var(--text-tertiary)] uppercase mt-24">
           <motion.div 
-            className="w-[60%] md:w-[28%] aspect-[3/4] absolute right-0 md:right-[2%] top-[10%] md:top-auto md:relative opacity-30 md:opacity-100 z-0 bg-[var(--bg-secondary)] border border-[var(--border-subtle)] p-2 md:p-3 hover:-rotate-1 transition-transform duration-700 md:-mt-12"
-            initial={{ opacity: 0, scale: 0.95, rotate: 2 }}
-            animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.8 }}
-            data-cursor="VIEW"
+            className="flex flex-col gap-1"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: timeShift ? 10 : 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
           >
-            <div className="w-full h-full relative overflow-hidden bg-[var(--bg-primary)] grayscale hover:grayscale-0 transition-all duration-700 shadow-inner">
-              <Image 
-                src="/images/photos/soham-portrait.png" 
-                alt="Soham Kundu" 
-                fill 
-                className="object-cover object-center scale-105 hover:scale-100 transition-transform duration-700"
-                priority
-                sizes="(max-width: 768px) 60vw, 30vw"
-              />
-            </div>
-            {/* Technical corner brackets */}
-            <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[var(--text-tertiary)] -translate-x-1 -translate-y-1" />
-            <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[var(--text-tertiary)] translate-x-1 translate-y-1" />
-            
-            <div className="absolute -bottom-6 right-0 font-technical text-[9px] text-[var(--text-tertiary)] tracking-widest uppercase">
-              FIG. 001 // PORTRAIT
-            </div>
+            <span className="text-[var(--text-primary)] text-xs mb-1">SK</span>
+            <span>SYSTEM / 01</span>
+            <span className="hidden md:block">V2.0.26</span>
+          </motion.div>
+          
+          <motion.div 
+            className="flex items-center gap-2"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: timeShift ? -10 : 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-primary)] animate-pulse shadow-[0_0_8px_var(--accent-primary)]" />
+            <span className="text-[var(--accent-primary)] transition-all duration-300">
+              {hoverState === "SOFTWARE ENGINEERING" ? "SYS.ONLINE" : "SYS.INTERACTIVE"}
+            </span>
           </motion.div>
         </div>
 
-        {/* Bottom Navigation & Positioning */}
-        <div className="mt-24 flex flex-col md:flex-row justify-between items-start md:items-end gap-8 pb-4">
+        {/* Main Interface Center */}
+        <div className="flex-grow flex flex-col md:flex-row items-start md:items-center mt-12 md:mt-24 relative w-full">
+          {/* Typography */}
+          <HeroType mouseX={mouseX} mouseY={mouseY} />
+          
+          {/* Portrait */}
+          <HeroPortrait mouseX={mouseX} mouseY={mouseY} setHoverState={setHoverState} />
+        </div>
+
+        {/* Bottom Edge Details */}
+        <div className="w-full flex flex-col md:flex-row justify-between items-start md:items-end gap-12 mt-20 md:mt-12">
+          
           <motion.div 
-            className="font-technical text-xs leading-relaxed text-[var(--text-secondary)] uppercase tracking-wider max-w-sm"
+            className="font-technical text-[9px] md:text-xs leading-relaxed text-[var(--text-tertiary)] uppercase tracking-wider"
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.9 }}
+            animate={{ opacity: 1, y: timeShift ? -10 : 0 }}
+            transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
           >
-            <p>Building scalable systems and modern interfaces.</p>
-            <div className="flex gap-4 mt-2 text-[var(--text-tertiary)]">
+            <p className="text-[var(--text-secondary)] mb-3 font-sans lowercase italic text-sm md:text-base">building scalable systems</p>
+            <div className="flex flex-wrap gap-x-4 gap-y-2">
               <span>FULL STACK</span>
-              <span>{"//"}</span>
+              <span className="opacity-50">{"//"}</span>
               <span>FRONTEND</span>
-              <span>{"//"}</span>
+              <span className="opacity-50">{"//"}</span>
               <span>BACKEND</span>
             </div>
-            <div className="flex gap-4 mt-1 text-[var(--text-tertiary)]">
-              <span>AI / GENAI</span>
-              <span>{"//"}</span>
+            <div className="flex flex-wrap gap-x-4 gap-y-2 mt-1">
+              <span>AI</span>
+              <span className="opacity-50">{"//"}</span>
               <span>REAL-TIME</span>
             </div>
           </motion.div>
 
-          {/* Scroll button removed as requested */}
+          <div 
+            className="flex flex-col items-start md:items-end gap-6"
+            onMouseEnter={() => setHoverState("EXPLORATION")}
+            onMouseLeave={() => setHoverState("SOFTWARE ENGINEERING")}
+          >
+            {/* Interactive Data Stream / Status */}
+            <motion.div 
+              className="font-technical text-[9px] tracking-widest text-[var(--accent-primary)] uppercase text-right"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1 }}
+            >
+              FIELD / {hoverState}
+            </motion.div>
+
+            {/* Smart Scroll Indicator / CTA */}
+            <HeroCTA />
+          </div>
         </div>
+
       </div>
     </section>
   );

@@ -43,7 +43,7 @@ export default function Navbar() {
     <>
       <header
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-          scrolled ? "py-4 bg-[var(--bg-primary)]/80 backdrop-blur-md border-b border-[var(--border-subtle)]" : "py-8"
+          scrolled ? "py-3 md:py-4 bg-[var(--bg-primary)]/80 backdrop-blur-md border-b border-[var(--border-subtle)]" : "py-4 md:py-8"
         }`}
       >
         <div className="container-editorial flex items-center justify-between">
@@ -89,23 +89,23 @@ export default function Navbar() {
             
             {/* Mobile Menu Trigger */}
           <button
-            className="md:hidden relative z-[60] w-8 h-8 flex flex-col justify-center items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)]"
+            className="md:hidden relative z-[60] w-11 h-11 flex flex-col justify-center items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)]"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle mobile menu"
             aria-expanded={mobileMenuOpen}
           >
             <span
-              className={`w-full h-[1px] bg-current transition-all duration-300 ${
+              className={`w-6 h-[1px] bg-current transition-all duration-300 ${
                 mobileMenuOpen ? "rotate-45 translate-y-[7px]" : ""
               }`}
             />
             <span
-              className={`w-full h-[1px] bg-current transition-all duration-300 ${
+              className={`w-6 h-[1px] bg-current transition-all duration-300 ${
                 mobileMenuOpen ? "opacity-0" : "opacity-100"
               }`}
             />
             <span
-              className={`w-full h-[1px] bg-current transition-all duration-300 ${
+              className={`w-6 h-[1px] bg-current transition-all duration-300 ${
                 mobileMenuOpen ? "-rotate-45 -translate-y-[7px]" : ""
               }`}
             />

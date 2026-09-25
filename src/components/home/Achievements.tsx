@@ -13,8 +13,8 @@ export default function Achievements() {
           {/* Header Row */}
           <div className="hidden md:grid grid-cols-12 gap-8 pb-4 border-b border-[var(--border-default)] font-technical text-[10px] text-[var(--text-tertiary)] uppercase tracking-widest">
             <div className="col-span-1">ID</div>
-            <div className="col-span-5">CERTIFICATION</div>
-            <div className="col-span-4">ISSUER</div>
+            <div className="col-span-6">CERTIFICATION</div>
+            <div className="col-span-3">ISSUER</div>
             <div className="col-span-2 text-right">YEAR</div>
           </div>
 
@@ -34,8 +34,8 @@ export default function Achievements() {
                       {numStr}
                     </div>
                     
-                    <div className="md:col-span-5">
-                      <h3 className="font-serif text-2xl text-[var(--text-primary)] group-hover:text-[var(--accent-primary)] transition-colors duration-300 group-hover:translate-x-2 transform">
+                    <div className="md:col-span-6 pr-4">
+                      <h3 className="font-serif text-xl lg:text-2xl text-[var(--text-primary)] group-hover:text-[var(--accent-primary)] transition-colors duration-300 group-hover:translate-x-2 transform leading-tight md:leading-snug break-words">
                         {cert.title}
                       </h3>
                       <p className="font-sans text-sm text-[var(--text-secondary)] mt-2 md:hidden">
@@ -43,7 +43,7 @@ export default function Achievements() {
                       </p>
                     </div>
                     
-                    <div className="hidden md:block md:col-span-4 font-technical text-xs text-[var(--text-secondary)] uppercase tracking-wider">
+                    <div className="hidden md:block md:col-span-3 font-technical text-xs text-[var(--text-secondary)] uppercase tracking-wider pr-4">
                       {cert.issuer}
                     </div>
                     

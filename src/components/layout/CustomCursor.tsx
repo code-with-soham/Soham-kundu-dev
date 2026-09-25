@@ -71,26 +71,29 @@ export default function CustomCursor() {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 z-[99999] pointer-events-none flex items-center justify-center rounded-full bg-[var(--accent-primary)] mix-blend-difference text-[var(--bg-primary)] font-technical text-[10px] font-medium tracking-widest uppercase overflow-hidden"
+      className="fixed top-0 left-0 z-[99999] pointer-events-none flex items-center justify-center bg-[var(--accent-primary)] mix-blend-difference text-[var(--bg-primary)] font-technical text-[8px] font-medium tracking-widest uppercase whitespace-nowrap"
       style={{
         x: cursorXSpring,
         y: cursorYSpring,
         translateX: "-50%",
         translateY: "-50%",
+        borderRadius: label ? "4px" : "50%",
       }}
-      initial={{ width: 12, height: 12, opacity: 0 }}
+      initial={{ width: 8, height: 8, opacity: 0 }}
       animate={{
-        width: label ? 64 : 12,
-        height: label ? 64 : 12,
+        width: label ? "auto" : 8,
+        height: label ? 20 : 8,
         opacity: isVisible ? 1 : 0,
+        paddingLeft: label ? 8 : 0,
+        paddingRight: label ? 8 : 0,
       }}
-      transition={{ type: "spring", stiffness: 300, damping: 25 }}
+      transition={{ type: "spring", stiffness: 400, damping: 30 }}
     >
       {label && (
         <motion.span
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.1 }}
+          initial={{ opacity: 0, x: -5 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.05 }}
         >
           {label}
         </motion.span>
